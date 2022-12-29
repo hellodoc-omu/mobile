@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hellodoc/widgets/logo.dart';
+import 'package:hellodoc/screens/splash_screen.dart';
+import 'package:hellodoc/helpers/variable_breakpoints.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      home: Scaffold(
-        body: Center(
-          child: Logo.square(width: 128),
-        ),
+      title: 'Hellodoc',
+      theme: ThemeData(
+        primaryColor: colors["primary"],
       ),
+      home: const SplashScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

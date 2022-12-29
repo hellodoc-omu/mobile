@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hellodoc/screens/login_screen.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
+import 'package:hellodoc/screens/reset_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Inter',
         primaryColor: colors["primary"],
       ),
-      home: const LoginScreen(),
+      home: const ResetScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

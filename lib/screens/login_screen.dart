@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
+import 'package:hellodoc/widgets/custom_button.dart';
 import 'package:hellodoc/widgets/logo.dart';
 import 'package:hellodoc/widgets/textbox.dart';
 
@@ -37,6 +38,11 @@ class _LoginScreen extends State<LoginScreen> {
             obscureText: true,
             controller: passwordController,
             validator: (v) => null,
+          ),
+          const SizedBox(height: 16),
+          CustomButton(
+            onTap: () {},
+            innerText: "Giriş Yap",
           ),
         ],
       ),

@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Hellodoc',
       theme: ThemeData(
+        fontFamily: 'Inter',
         primaryColor: colors["primary"],
       ),
       home: const LoginScreen(),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hellodoc/screens/splash_screen.dart';
+import 'package:hellodoc/screens/login_screen.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
 
 void main() {
@@ -14,9 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Hellodoc',
       theme: ThemeData(
+        fontFamily: 'Inter',
         primaryColor: colors["primary"],
       ),
-      home: const SplashScreen(),
+      home: const LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

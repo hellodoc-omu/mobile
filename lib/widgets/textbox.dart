@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:hellodoc/utilities/utilities.dart';
 
 class Textbox extends StatefulWidget {
-  const Textbox(
-      {super.key,
-      required this.controller,
-      required this.validator,
-      required this.hintText,
-      this.hintSize = 16,
-      this.hintColor = const Color.fromRGBO(0, 0, 0, 0.7),
-      this.fill = true,
-      this.fillColor = Colors.white,
-      this.borderColor = Colors.transparent,
-      this.borderRadius = 10,
-      this.shadowWidth = 10,
-      this.contentPadding =
-          const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-      this.obscureText = false});
+  const Textbox({
+    super.key,
+    required this.controller,
+    required this.validator,
+    required this.hintText,
+    this.hintSize = 16,
+    this.hintColor = const Color.fromRGBO(0, 0, 0, 0.7),
+    this.fill = true,
+    this.fillColor = Colors.white,
+    this.borderColor = Colors.transparent,
+    this.borderRadius = 10,
+    this.contentPadding = const EdgeInsets.symmetric(
+      horizontal: 10,
+      vertical: 15,
+    ),
+    this.obscureText = false,
+  });
 
   final TextEditingController controller;
   final String? Function(String?)? validator;
@@ -29,7 +32,6 @@ class Textbox extends StatefulWidget {
 
   final Color borderColor;
   final double borderRadius;
-  final double shadowWidth;
   final EdgeInsets contentPadding;
 
   final bool obscureText;
@@ -60,15 +62,16 @@ class _Textbox extends State<Textbox> {
       contentPadding: widget.contentPadding,
     );
 
-    return Material(
-      color: Colors.transparent,
-      elevation: widget.shadowWidth,
-      child: TextFormField(
-        controller: widget.controller,
-        validator: widget.validator,
-        obscureText: widget.obscureText,
-        decoration: inputDecoration,
-      ),
+    var textbox = TextFormField(
+      controller: widget.controller,
+      validator: widget.validator,
+      obscureText: widget.obscureText,
+      decoration: inputDecoration,
+    );
+
+    return applyShadowToWidget(
+      w: textbox,
+      borderRadius: widget.borderRadius,
     );
   }
 }

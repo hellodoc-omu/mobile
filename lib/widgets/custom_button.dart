@@ -12,7 +12,6 @@ class CustomButton extends StatefulWidget {
     this.innerTextPaddingV = 15,
     this.fitWidth = false,
     this.bgColor = const Color(0xFF82AAE3),
-    this.shadowWidth = 10,
     this.borderRadius = 10,
   });
 
@@ -28,7 +27,6 @@ class CustomButton extends StatefulWidget {
   final bool fitWidth;
 
   final Color bgColor;
-  final double shadowWidth;
   final double borderRadius;
 
   @override
@@ -58,15 +56,16 @@ class _CustomButton extends State<CustomButton> {
       child: Center(child: text),
     );
 
-    var buttonWithShadow = Material(
-      color: Colors.transparent,
-      elevation: widget.shadowWidth,
-      child: widget.fitWidth
-          ? SizedBox(
-              width: double.infinity,
-              child: button,
-            )
-          : button,
+    var questioned = widget.fitWidth
+        ? SizedBox(
+            width: double.infinity,
+            child: button,
+          )
+        : button;
+
+    var buttonWithShadow = applyShadowToWidget(
+      w: questioned,
+      borderRadius: widget.borderRadius,
     );
 
     return bindTapEventToWidget(buttonWithShadow, widget.onTap);

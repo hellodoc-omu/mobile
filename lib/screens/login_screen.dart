@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
+import 'package:hellodoc/widgets/buttoned_text.dart';
 import 'package:hellodoc/widgets/custom_button.dart';
 import 'package:hellodoc/widgets/logo.dart';
 import 'package:hellodoc/widgets/textbox.dart';
@@ -20,6 +21,14 @@ class _LoginScreen extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
+    var bottomTexts = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        ButtonedText(onTap: () {}, innerText: "Şifremi unuttum"),
+        ButtonedText(onTap: () {}, innerText: "Hesabınız yok mu?"),
+      ],
+    );
 
     var form = Form(
       key: formKey,
@@ -44,6 +53,8 @@ class _LoginScreen extends State<LoginScreen> {
             onTap: () {},
             innerText: "Giriş Yap",
           ),
+          const SizedBox(height: 16),
+          bottomTexts,
         ],
       ),
     );
@@ -51,9 +62,7 @@ class _LoginScreen extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: colors["secondary"],
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
             SizedBox(
               height: size.height / 2,

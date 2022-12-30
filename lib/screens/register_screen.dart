@@ -63,7 +63,11 @@ class _RegisterScreen extends State<RegisterScreen> {
             hintText: "Parolanız",
           ),
           const SizedBox(height: 16),
-          CustomButton(onTap: () {}, innerText: "İlerle"),
+          CustomButton(
+            onTap: () {},
+            innerText: "İlerle",
+            fitWidth: true,
+          ),
           const SizedBox(height: 16),
           bottomTextSection,
         ],

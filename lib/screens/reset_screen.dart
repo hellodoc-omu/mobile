@@ -16,7 +16,7 @@ class _ResetScreen extends State<ResetScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     GlobalKey<FormState>? formKey = GlobalKey<FormState>();
-    
+
     final emailController = TextEditingController();
 
     var logoSection = SizedBox(
@@ -48,8 +48,12 @@ class _ResetScreen extends State<ResetScreen> {
             validator: (v) => null,
             hintText: "E-posta adresiniz",
           ),
-            const SizedBox(height: 16),
-          CustomButton(onTap: () {}, innerText: "Sıfırla")
+          const SizedBox(height: 16),
+          CustomButton(
+            onTap: () {},
+            innerText: "Sıfırla",
+            fitWidth: true,
+          )
         ],
       ),
     );

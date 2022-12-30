@@ -9,6 +9,7 @@ class CustomButton extends StatefulWidget {
     this.innerTextColor = Colors.white,
     this.innerTextSize = 24,
     this.innerTextWeight = FontWeight.w700,
+    this.innerTextPaddingH = 10,
     this.innerTextPaddingV = 15,
     this.fitWidth = false,
     this.bgColor = const Color(0xFF82AAE3),
@@ -22,6 +23,7 @@ class CustomButton extends StatefulWidget {
   final double innerTextSize;
   final FontWeight innerTextWeight;
 
+  final double innerTextPaddingH;
   final double innerTextPaddingV;
 
   final bool fitWidth;
@@ -48,12 +50,15 @@ class _CustomButton extends State<CustomButton> {
     );
 
     var button = Container(
-      padding: EdgeInsets.symmetric(vertical: widget.innerTextPaddingV),
+      padding: EdgeInsets.symmetric(
+        horizontal: widget.innerTextPaddingH,
+        vertical: widget.innerTextPaddingV,
+      ),
       decoration: BoxDecoration(
         color: widget.bgColor,
         borderRadius: BorderRadius.circular(widget.borderRadius),
       ),
-      child: Center(child: text),
+      child: widget.fitWidth ? Center(child: text) : text,
     );
 
     var questioned = widget.fitWidth

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
-import 'package:hellodoc/screens/reset_screen.dart';
+import 'package:hellodoc/screens/register_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Inter',
         primaryColor: colors["primary"],
       ),
-      home: const ResetScreen(),
+      home: const RegisterScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -52,6 +52,7 @@ class _LoginScreen extends State<LoginScreen> {
           CustomButton(
             onTap: () {},
             innerText: "Giriş Yap",
+            fitWidth: true,
           ),
           const SizedBox(height: 16),
           bottomTexts,

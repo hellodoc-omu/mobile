@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hellodoc/utilities/utilities.dart';
-import 'package:hellodoc/widgets/custom_drawer.dart';
+import 'package:hellodoc/widgets/drawer/custom_drawer.dart';
 import '../helpers/variable_breakpoints.dart';
 import '../widgets/logo.dart';
 
@@ -20,22 +19,14 @@ class _SearchDoctorScreen extends State<SearchDoctorScreen> {
       backgroundColor: colors["primary"],
       appBar: AppBar(
         backgroundColor: colors["primary"],
-        leading: bindTapEventToWidget(
-          const Icon(
-            Icons.menu,
-          ),
-          () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const CustomDrawer()));
-          },
-        ),
       ),
+      drawer: const CustomDrawer(),
       body: Center(
         child: ListView(
           children: [
             SizedBox(
               height: size.height / 2,
-              child: Center(child: Logo.square(width: 256)),
+              child: Center(child: Logo.square(width: 230)),
             ),
           ],
         ),

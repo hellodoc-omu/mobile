@@ -7,6 +7,8 @@ class Textbox extends StatefulWidget {
     required this.controller,
     required this.validator,
     required this.hintText,
+    this.onFieldSubmitted,
+    this.focusNode,
     this.hintSize = 16,
     this.hintColor = const Color.fromRGBO(0, 0, 0, 0.7),
     this.fill = true,
@@ -22,6 +24,8 @@ class Textbox extends StatefulWidget {
 
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final void Function(String)? onFieldSubmitted;
+  final FocusNode? focusNode;
 
   final String hintText;
   final double hintSize;
@@ -63,10 +67,12 @@ class _Textbox extends State<Textbox> {
     );
 
     var textbox = TextFormField(
+      decoration: inputDecoration,
       controller: widget.controller,
       validator: widget.validator,
       obscureText: widget.obscureText,
-      decoration: inputDecoration,
+      focusNode: widget.focusNode,
+      onFieldSubmitted: widget.onFieldSubmitted,
     );
 
     return applyShadowToWidget(

@@ -7,7 +7,7 @@ Widget listTile(String text, IconData icon) {
       icon,
       color: colors["primary"],
     ),
-    title: Text(text),
+    title: Text(text, style: const TextStyle(fontSize: 20)),
     onTap: () {},
   );
 }

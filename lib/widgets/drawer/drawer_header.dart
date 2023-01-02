@@ -8,7 +8,7 @@ Widget header(String name, String email) {
         arrowColor: Colors.white,
         accountName: Text(
           name,
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black, fontSize: 20),
         ),
         accountEmail: Text(
           email,

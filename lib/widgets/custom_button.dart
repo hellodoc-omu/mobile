@@ -12,7 +12,9 @@ class CustomButton extends StatefulWidget {
     this.innerTextPaddingH = 10,
     this.innerTextPaddingV = 15,
     this.fitWidth = false,
+    this.isActive = true,
     this.bgColor = const Color(0xFF82AAE3),
+    this.inActiveBgColor = const Color(0xFFBFEAF5),
     this.borderRadius = 10,
   });
 
@@ -28,7 +30,10 @@ class CustomButton extends StatefulWidget {
 
   final bool fitWidth;
 
+  final bool isActive;
   final Color bgColor;
+  final Color inActiveBgColor;
+
   final double borderRadius;
 
   @override
@@ -55,7 +60,7 @@ class _CustomButton extends State<CustomButton> {
         vertical: widget.innerTextPaddingV,
       ),
       decoration: BoxDecoration(
-        color: widget.bgColor,
+        color: widget.isActive ? widget.bgColor : widget.inActiveBgColor,
         borderRadius: BorderRadius.circular(widget.borderRadius),
       ),
       child: widget.fitWidth ? Center(child: text) : text,
@@ -73,6 +78,8 @@ class _CustomButton extends State<CustomButton> {
       borderRadius: widget.borderRadius,
     );
 
-    return bindTapEventToWidget(buttonWithShadow, widget.onTap);
+    return widget.isActive
+        ? bindTapEventToWidget(buttonWithShadow, widget.onTap)
+        : buttonWithShadow;
   }
 }

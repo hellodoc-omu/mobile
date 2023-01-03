@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
-import 'package:hellodoc/screens/register_screen.dart';
-import 'package:hellodoc/screens/search_doctor_screen.dart';
+import 'package:hellodoc/screens/doctor_mscreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Inter',
         primaryColor: colors["primary"],
       ),
-      home: const SearchDoctorScreen(),
+      home: const DoctorMainScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

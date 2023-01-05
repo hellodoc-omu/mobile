@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
 import 'package:hellodoc/screens/doctor_mscreen.dart';
+import 'package:hellodoc/screens/messages_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,8 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Inter',
         primaryColor: colors["primary"],
+        appBarTheme: AppBarTheme(color: colors["primary"], elevation: 0),
       ),
-      home: const DoctorMainScreen(),
+      home: const MessagesScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

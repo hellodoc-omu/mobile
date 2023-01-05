@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
 import 'package:hellodoc/widgets/drawer/drawer_header.dart';
-import 'package:hellodoc/widgets/listtile.dart';
+import 'package:hellodoc/widgets/drawer/drawer_listtile.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});

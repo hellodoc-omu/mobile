@@ -82,9 +82,22 @@ class _DoctorProfileSeenByPatient extends State<DoctorProfileSeenByPatient> {
           topBar,
           profil('Berkay Gebeş', 'berkay.gebes@bil.omu.edu.tr'),
           stars(30, true),
+          const Center(
+            child: Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: Text(
+                'Önceki Görüşmeler',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
           Padding(
             padding:
-                const EdgeInsets.only(left: 50, right: 50, top: 20, bottom: 10),
+                const EdgeInsets.only(left: 50, right: 50, top: 15, bottom: 10),
             child: shadowedMeetsCard,
           ),
           Padding(

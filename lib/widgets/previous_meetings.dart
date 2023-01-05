@@ -38,7 +38,7 @@ Widget meetingCard() {
           ),
           ListTile(
             title: Text(major2!),
-            trailing: stars(15, false),
+            trailing: stars(15, true),
             subtitle: Text(date2!),
           ),
           ListTile(

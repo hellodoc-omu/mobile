@@ -81,7 +81,7 @@ class _DoctorProfileSeenByPatient extends State<DoctorProfileSeenByPatient> {
         children: [
           topBar,
           profil('Berkay Gebeş', 'berkay.gebes@bil.omu.edu.tr'),
-          stars(30, false),
+          stars(30, true),
           Padding(
             padding:
                 const EdgeInsets.only(left: 50, right: 50, top: 20, bottom: 10),

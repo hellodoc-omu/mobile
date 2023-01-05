@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hellodoc/helpers/variable_breakpoints.dart';
 
 class UserAvatar extends StatelessWidget {
   const UserAvatar({
@@ -9,6 +10,7 @@ class UserAvatar extends StatelessWidget {
     this.radius = 50,
     this.backgroundColor = const Color(0xFFFFFFFF),
     this.backgroundImage,
+    this.isOnline = false,
   });
 
   final IconData iconData;
@@ -18,6 +20,8 @@ class UserAvatar extends StatelessWidget {
   final double radius;
   final Color backgroundColor;
   final ImageProvider? backgroundImage;
+
+  final bool isOnline;
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +37,27 @@ class UserAvatar extends StatelessWidget {
       child: backgroundImage != null ? null : icon,
     );
 
-    return Material(
+    var avatarWithShadow = Material(
       color: Colors.transparent,
-      elevation: 6,
+      elevation: 2,
       shape: const CircleBorder(side: BorderSide.none),
       child: avatar,
+    );
+
+    var onlineStateCircle = SizedBox(
+      width: radius * 1.1,
+      child: CircleAvatar(
+        radius: radius / 4,
+        backgroundColor: colors["avaOnline"],
+      ),
+    );
+
+    return Stack(
+      alignment: Alignment.bottomRight,
+      children: [
+        avatarWithShadow,
+        isOnline ? onlineStateCircle : const SizedBox.shrink(),
+      ],
     );
   }
 }

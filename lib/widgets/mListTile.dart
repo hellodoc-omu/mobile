@@ -42,12 +42,12 @@ class _MessageListTile extends State<MessageListTile> {
   Widget build(BuildContext context) {
     var titleStyle = TextStyle(
       color: widget.titleColor,
-      fontSize: 18,
+      fontSize: widget.titleSize,
     );
 
     var subTitleStyle = TextStyle(
       color: widget.subTitleColor,
-      fontSize: 14,
+      fontSize: widget.subTitleSize,
     );
 
     return ListTile(

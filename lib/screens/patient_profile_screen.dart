@@ -40,15 +40,20 @@ class _PatientProfileScreen extends State<PatientProfileScreen> {
         children: [
           profil('Berkay Gebeş', 'berkay.gebes@bil.omu.edu.tr'),
           Padding(
-            padding: const EdgeInsets.only(right: 100, left: 100, top: 40),
-            child: CustomButton(
-              onTap: () {},
-              innerText: "Profilimi Güncelle",
-              bgColor: Colors.white,
-              innerTextColor: Colors.black45,
-              innerTextSize: 12,
-              innerTextPaddingV: 8,
-              fitWidth: true,
+            padding: const EdgeInsets.only(top: 55.0, left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomButton(
+                  onTap: () {},
+                  innerText: "Profilimi Güncelle",
+                  bgColor: Colors.white,
+                  innerTextColor: Colors.black45,
+                  innerTextSize: 12,
+                  innerTextPaddingV: 8,
+                ),
+              ],
             ),
           ),
         ],

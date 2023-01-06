@@ -70,7 +70,7 @@ class _Textbox extends State<Textbox> {
         padding: const EdgeInsets.only(right: 8),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: widget.trailings!,
+          children: widget.trailings ?? [],
         ),
       ),
       filled: widget.fill,

@@ -16,6 +16,7 @@ class CustomButton extends StatefulWidget {
     this.bgColor = const Color(0xFF82AAE3),
     this.inActiveBgColor = const Color(0xFFBFEAF5),
     this.borderRadius = 10,
+    this.maxWidth = double.infinity,
   });
 
   final Function() onTap;
@@ -35,6 +36,7 @@ class CustomButton extends StatefulWidget {
   final Color inActiveBgColor;
 
   final double borderRadius;
+  final double maxWidth;
 
   @override
   State<CustomButton> createState() => _CustomButton();
@@ -55,6 +57,7 @@ class _CustomButton extends State<CustomButton> {
     );
 
     var button = Container(
+      constraints: BoxConstraints(maxWidth: widget.maxWidth),
       padding: EdgeInsets.symmetric(
         horizontal: widget.innerTextPaddingH,
         vertical: widget.innerTextPaddingV,

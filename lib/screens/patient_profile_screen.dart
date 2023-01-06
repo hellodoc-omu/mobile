@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
 import 'package:hellodoc/widgets/custom_button.dart';
-import 'package:hellodoc/widgets/user_avatar.dart';
+import '../widgets/profile.dart';
 
 class PatientProfileScreen extends StatefulWidget {
   const PatientProfileScreen({super.key});
@@ -13,38 +13,6 @@ class PatientProfileScreen extends StatefulWidget {
 class _PatientProfileScreen extends State<PatientProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    Size? size = MediaQuery.of(context).size;
-
-    Widget profil(String name, String mail) {
-      return Column(
-        children: [
-          const UserAvatar(),
-          Text(
-            name,
-            style: const TextStyle(fontSize: 30, color: Colors.white),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Text(
-              mail,
-              style: const TextStyle(fontSize: 15, color: Colors.white),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: CustomButton(
-              onTap: () {},
-              innerText: "Profilimi Güncelle",
-              bgColor: Colors.white,
-              innerTextColor: Colors.black45,
-              innerTextSize: 12,
-              innerTextPaddingV: 8,
-            ),
-          ),
-        ],
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -69,7 +37,21 @@ class _PatientProfileScreen extends State<PatientProfileScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [profil('Berkay Gebeş', 'berkay.gebes@gmail.com')],
+        children: [
+          profil('Berkay Gebeş', 'berkay.gebes@bil.omu.edu.tr'),
+          Padding(
+            padding: const EdgeInsets.only(right: 100, left: 100, top: 40),
+            child: CustomButton(
+              onTap: () {},
+              innerText: "Profilimi Güncelle",
+              bgColor: Colors.white,
+              innerTextColor: Colors.black45,
+              innerTextSize: 12,
+              innerTextPaddingV: 8,
+              fitWidth: true,
+            ),
+          ),
+        ],
       ),
     );
   }

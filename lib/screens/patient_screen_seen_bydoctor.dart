@@ -1,7 +1,9 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
 import 'package:hellodoc/widgets/custom_button.dart';
-import 'package:hellodoc/widgets/user_avatar.dart';
+import 'package:hellodoc/widgets/profile.dart';
 
 class PatientScreenSeenByDoctor extends StatefulWidget {
   const PatientScreenSeenByDoctor({super.key});
@@ -14,36 +16,23 @@ class PatientScreenSeenByDoctor extends StatefulWidget {
 class _PatientScreenSeenByDoctor extends State<PatientScreenSeenByDoctor> {
   @override
   Widget build(BuildContext context) {
-    Widget profil(String name, String mail) {
-      return Column(
+    var button = Padding(
+      padding: const EdgeInsets.only(top: 55.0, left: 20, right: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const UserAvatar(),
-          Text(
-            name,
-            style: const TextStyle(fontSize: 30, color: Colors.white),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Text(
-              mail,
-              style: const TextStyle(fontSize: 15, color: Colors.white),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: CustomButton(
-              onTap: () {},
-              innerText: "Mesaj Gönder",
-              bgColor: Colors.white,
-              innerTextColor: Colors.black45,
-              innerTextSize: 12,
-              innerTextPaddingV: 8,
-            ),
+          CustomButton(
+            onTap: () {},
+            innerText: "Mesaj Gönder",
+            bgColor: Colors.white,
+            innerTextColor: Colors.black45,
+            innerTextSize: 12,
+            innerTextPaddingV: 8,
           ),
         ],
-      );
-    }
-
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -68,7 +57,10 @@ class _PatientScreenSeenByDoctor extends State<PatientScreenSeenByDoctor> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [profil('Berkay Gebeş', 'berkay.gebes@gmail.com')],
+        children: [
+          profil('Berkay Gebeş', 'berkay.gebes@bil.omu.edu.tr'),
+          button
+        ],
       ),
     );
   }

@@ -19,7 +19,8 @@ String? major2 = lastMeets[1]['anaBilimDali'];
 String? date2 = lastMeets[1]['tarih'];
 
 Widget meetingCard() {
-  return SizedBox(
+  return ConstrainedBox(
+    constraints: const BoxConstraints.expand(height: 200, width: 150),
     child: Card(
       color: Colors.white,
       child: ListView(

@@ -23,15 +23,14 @@ class _DoctorProfileScreen extends State<DoctorProfileScreen> {
             'Dermotoloji',
             'Cilt Hastalıkları,Göz Hastalıkları'));
 
-    var button = Expanded(
-      child: CustomButton(
-        onTap: () {},
-        innerText: 'Profilimi Güncelle',
-        bgColor: Colors.white,
-        innerTextColor: Colors.black26,
-        innerTextPaddingH: 12,
-        innerTextPaddingV: 14,
-      ),
+    var button = CustomButton(
+      onTap: () {},
+      innerText: 'Profilimi Güncelle',
+      innerTextSize: 12,
+      bgColor: Colors.white,
+      innerTextColor: Colors.black54,
+      innerTextPaddingH: 5,
+      innerTextPaddingV: 8,
     );
 
     return Scaffold(
@@ -60,7 +59,15 @@ class _DoctorProfileScreen extends State<DoctorProfileScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           profil('Berkay Gebeş', 'berkay.gebes@bil.omu.edu.tr'),
-          stars(30, true),
+          const SizedBox(height: 12),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              stars(25, true),
+              button,
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0),
             child: shadowedDoctorCard,

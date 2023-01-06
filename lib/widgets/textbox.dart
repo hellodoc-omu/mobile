@@ -21,6 +21,7 @@ class Textbox extends StatefulWidget {
     ),
     this.obscureText = false,
     this.maxWidth = double.infinity,
+    this.trailings,
   });
 
   final TextEditingController controller;
@@ -42,6 +43,8 @@ class Textbox extends StatefulWidget {
   final bool obscureText;
   final double maxWidth;
 
+  final List<Widget>? trailings;
+
   @override
   State<Textbox> createState() => _Textbox();
 }
@@ -50,7 +53,7 @@ class _Textbox extends State<Textbox> {
   @override
   Widget build(BuildContext context) {
     var inputBorder = OutlineInputBorder(
-      borderSide: BorderSide.none,
+      borderSide: BorderSide(color: widget.borderColor),
       borderRadius: BorderRadius.circular(widget.borderRadius),
     );
 
@@ -61,6 +64,15 @@ class _Textbox extends State<Textbox> {
 
     var inputDecoration = InputDecoration(
       border: inputBorder,
+      enabledBorder: inputBorder,
+      focusedBorder: inputBorder,
+      suffixIcon: Padding(
+        padding: const EdgeInsets.only(right: 8),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: widget.trailings!,
+        ),
+      ),
       filled: widget.fill,
       fillColor: widget.fillColor,
       hintStyle: hintStyle,

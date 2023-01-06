@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
-import 'package:hellodoc/screens/doctors_profile_seen_bypatient.dart';
+import 'package:hellodoc/screens/patient_profile_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         primaryColor: colors["primary"],
         appBarTheme: AppBarTheme(color: colors["primary"], elevation: 0),
       ),
-      home: const DoctorProfileSeenByPatient(),
+      home: const PatientProfileScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

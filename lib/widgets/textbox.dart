@@ -20,6 +20,7 @@ class Textbox extends StatefulWidget {
       vertical: 15,
     ),
     this.obscureText = false,
+    this.maxWidth = double.infinity,
   });
 
   final TextEditingController controller;
@@ -39,6 +40,7 @@ class Textbox extends StatefulWidget {
   final EdgeInsets contentPadding;
 
   final bool obscureText;
+  final double maxWidth;
 
   @override
   State<Textbox> createState() => _Textbox();
@@ -66,13 +68,16 @@ class _Textbox extends State<Textbox> {
       contentPadding: widget.contentPadding,
     );
 
-    var textbox = TextFormField(
-      decoration: inputDecoration,
-      controller: widget.controller,
-      validator: widget.validator,
-      obscureText: widget.obscureText,
-      focusNode: widget.focusNode,
-      onFieldSubmitted: widget.onFieldSubmitted,
+    var textbox = ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: widget.maxWidth),
+      child: TextFormField(
+        decoration: inputDecoration,
+        controller: widget.controller,
+        validator: widget.validator,
+        obscureText: widget.obscureText,
+        focusNode: widget.focusNode,
+        onFieldSubmitted: widget.onFieldSubmitted,
+      ),
     );
 
     return applyShadowToWidget(

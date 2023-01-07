@@ -22,89 +22,93 @@ class _MakeAssessmentScreen extends State<MakeAssessmentScreen> {
 
     var form = Form(
       key: formKey,
-      child: Column(
-        children: [
-          SizedBox(height: 30),
-          Text(
-              "Doktor",
-            textAlign: TextAlign.right,
-            style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
-                fontSize: 25),
-          ),
-          SizedBox(height: 25),
-          Text(
-              "Berkay Gebeş",
-            textAlign: TextAlign.right,
-            style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w400,
-                fontSize: 18),
-          ),
-          SizedBox(height: 25),
-          Text(
-              "Değerlendirmem",
-            textAlign: TextAlign.right,
-            style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
-                fontSize: 25),
-          ),
-          SizedBox(height: 25),
-          Row(
-            children: [
-              SizedBox(width: 30),
-              Text(
-                  "Puan",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20),
-              ),
-              SizedBox(width: 50,),
-              Row(
-                children: [
-                  Icon(
-                    Icons.star,
-                    color: Colors.yellow,
-                  ),
-                  Icon(
-                    Icons.star,
-                    color: Colors.yellow,
-                  ),
-                  Icon(
-                    Icons.star,
-                    color: Colors.yellow,
-                  ),
-                  Icon(
-                    Icons.star_outline,
-                    color: Colors.yellow,
-                  ),
-                  Icon(
-                    Icons.star_outline,
-                    color: Colors.yellow,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 30),
-          Container(
-            child: Text(
-              "Değerlendirmenizi Yazınız ...",
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 30),
+            Text(
+                "Doktor",
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 25),
             ),
-            width: 375,
-            height: 350,
-            color: Colors.grey[100],
-          ),
-          SizedBox(height: 30),
-          CustomButton(
-            onTap: () {},
-            innerText: "İlerle",
-            fitWidth: true,
-          ),
-        ],
+            SizedBox(height: 25),
+            Text(
+                "Berkay Gebeş",
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 18),
+            ),
+            SizedBox(height: 25),
+            Text(
+                "Değerlendirmem",
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 25),
+            ),
+            SizedBox(height: 25),
+            Row(
+              children: [
+                SizedBox(width: 30),
+                Text(
+                    "Puan",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20),
+                ),
+                SizedBox(width: 50,),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                    ),
+                    Icon(
+                      Icons.star_outline,
+                      color: Colors.yellow,
+                    ),
+                    Icon(
+                      Icons.star_outline,
+                      color: Colors.yellow,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 30,),
+            Container(
+              child: Text(
+                "Değerlendirmenizi Yazınız ...",
+              ),
+              width: 375,
+              height: 350,
+              color: Colors.grey[100],
+            ),
+            SizedBox(height: 30),
+            CustomButton(
+              onTap: () {},
+              innerText: "İlerle",
+              fitWidth: true,
+            ),
+          ],
+        ),
       ),
     );
 

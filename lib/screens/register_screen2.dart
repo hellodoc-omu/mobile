@@ -15,6 +15,8 @@ class RegisterScreen2 extends StatefulWidget {
 class _RegisterScreen2 extends State<RegisterScreen2> {
   final nameController = TextEditingController();
 
+  int deger = 0;
+
   GlobalKey<FormState>? formKey = GlobalKey<FormState>();
   GlobalKey<FormState>? formKey2 = GlobalKey<FormState>();
 
@@ -71,10 +73,9 @@ class _RegisterScreen2 extends State<RegisterScreen2> {
                 ),
               ],
             ),
-            const SizedBox(height: 100),
+            const SizedBox(height: 50),
             Textbox(
               hintText: "Boş",
-              obscureText: true,
               controller: nameController,
               validator: (v) => null,
             ),
@@ -88,7 +89,28 @@ class _RegisterScreen2 extends State<RegisterScreen2> {
           ],
 
           ),
-          Row(
+          Column(
+            children: [
+              SizedBox(height: 20,),
+              RadioListTile(
+                  title: Text("Hasta"),
+                  value: 1,
+                  groupValue: deger,
+                  onChanged: (int? gelen){setState(() {
+                    deger = gelen!;
+                  });
+
+                    }),
+              RadioListTile(
+                  title: Text("Doktor"),
+                  value: 2,
+                  groupValue: deger,
+                  onChanged: (int? gelen){setState(() {
+                    deger = gelen!;
+                  });
+
+                  }),
+            ],
 
           )
         ],

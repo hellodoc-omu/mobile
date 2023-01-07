@@ -20,6 +20,13 @@ class _DrRegisterScreen extends State<DrRegisterScreen> {
 
   late String valueChoose;
 
+  bool? check1 = false;
+  bool? check2 = false;
+  bool? check3 = false;
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +72,35 @@ class _DrRegisterScreen extends State<DrRegisterScreen> {
                   width: 270,
                   height: 270,
                   color: Colors.white60,
-                  child: Row(
+                  child: Column(
                     children: [
-
+                      CheckboxListTile( //checkbox positioned at right
+                        value: check1,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            check1 = value;
+                          });
+                        },
+                        title: Text("Kardiyoloji"),
+                      ),
+                      CheckboxListTile( //checkbox positioned at right
+                        value: check2,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            check2 = value;
+                          });
+                        },
+                        title: Text("Dermatoloji"),
+                      ),
+                      CheckboxListTile( //checkbox positioned at right
+                        value: check3,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            check3 = value;
+                          });
+                        },
+                        title: Text("Kadın doğum"),
+                      ),
                     ],
                   ),
                 ),

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 Widget bindTapEventToWidget(Widget w, Function() f) {
@@ -22,5 +24,18 @@ Widget applyShadowToWidget({required Widget w, double borderRadius = 10}) {
       ],
     ),
     child: w,
+  );
+}
+
+Widget futureBridge({required Function child, required Future future}) {
+  return FutureBuilder(
+    future: future,
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        return child(snapshot.data!);
+      }
+
+      return const CircularProgressIndicator();
+    },
   );
 }

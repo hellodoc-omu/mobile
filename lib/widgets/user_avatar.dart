@@ -19,7 +19,7 @@ class UserAvatar extends StatelessWidget {
 
   final double radius;
   final Color backgroundColor;
-  final ImageProvider? backgroundImage;
+  final String? backgroundImage;
 
   final bool isOnline;
 
@@ -34,6 +34,8 @@ class UserAvatar extends StatelessWidget {
     var avatar = CircleAvatar(
       radius: radius,
       backgroundColor: backgroundColor,
+      backgroundImage:
+          backgroundImage != null ? NetworkImage(backgroundImage!) : null,
       child: backgroundImage != null ? null : icon,
     );
 

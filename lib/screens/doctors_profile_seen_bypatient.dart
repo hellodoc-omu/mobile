@@ -57,22 +57,13 @@ class _DoctorProfileSeenByPatient extends State<DoctorProfileSeenByPatient> {
       ],
     );
 
-    Widget doctorKnowledge = ConstrainedBox(
-      constraints: const BoxConstraints.expand(height: 250, width: 300),
-      child: doctorCard(
-          'Ondokuz Mayıs Üniversitesi Hastanesi',
-          'Cerrahpaşa Tıp Fakültesi',
-          'Dermotoloji',
-          'Cilt Hastalıkları,Göz Hastalıkları'),
-    );
-
-    Widget previousmeets = ConstrainedBox(
-      constraints: const BoxConstraints.expand(height: 200, width: 150),
-      child: meetingCard(),
-    );
-
-    var shadowedCoctorCard = applyShadowToWidget(w: doctorKnowledge);
-    var shadowedMeetsCard = applyShadowToWidget(w: previousmeets);
+    var shadowedDoctorCard = applyShadowToWidget(
+        w: doctorCard(
+            'Ondokuz Mayıs Üniversitesi Hastanesi',
+            'Cerrahpaşa Tıp Fakültesi',
+            'Dermotoloji',
+            'Cilt Hastalıkları,Göz Hastalıkları'));
+    var shadowedMeetsCard = applyShadowToWidget(w: meetingCard());
 
     return Scaffold(
       backgroundColor: colors["primary"],
@@ -102,7 +93,7 @@ class _DoctorProfileSeenByPatient extends State<DoctorProfileSeenByPatient> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 50, right: 50, top: 10),
-            child: shadowedCoctorCard,
+            child: shadowedDoctorCard,
           ),
         ],
       ),

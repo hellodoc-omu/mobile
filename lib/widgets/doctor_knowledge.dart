@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 Widget doctorCard(
     String hospital, String faculty, String major, String profession) {
-  return SizedBox(
+  return ConstrainedBox(
+    constraints: const BoxConstraints.expand(height: 250, width: 300),
     child: Card(
       color: Colors.white,
       child: ListView(

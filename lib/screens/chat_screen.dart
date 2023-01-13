@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:hellodoc/actions/actions.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
+import 'package:hellodoc/models/relationals/mesaj.dart';
+import 'package:hellodoc/utilities/utilities.dart';
 import 'package:hellodoc/widgets/mListTile.dart';
 import 'package:hellodoc/widgets/message_box.dart';
 import 'package:hellodoc/widgets/textbox.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+  const ChatScreen({
+    super.key,
+    required this.opposite,
+    required this.amIDoctor,
+    required this.dNo,
+    required this.hNo,
+  });
+
+  final dynamic opposite;
+  final bool amIDoctor;
+  final int dNo;
+  final int hNo;
 
   @override
   State<ChatScreen> createState() => _ChatScreen();
@@ -16,54 +30,42 @@ class _ChatScreen extends State<ChatScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
+    Future<List<Mesaj>> mesajlar =
+        fetchMessages(hNo: widget.hNo, dNo: widget.dNo);
+
     var appBarItem = MessageListTile(
-      titleText: "Yunus Emre Türk",
+      titleText: widget.opposite["isimSoyisim"],
       titleColor: Colors.white,
-      subTitleText: "Çevrimiçi",
+      subTitleText: widget.opposite["online"] == 1 ? "Çevrimiçi" : "Çevrimdışı",
       subTitleColor: Colors.white.withOpacity(0.7),
       onTap: () {},
+      avatar: widget.opposite["avatar"],
+      isOnline: widget.opposite["online"] == 1,
       defaultAvatarRadius: 20,
       defaultAvatarIconSize: 20,
     );
 
-    var messagesList = SingleChildScrollView(
-      child: Column(
-        children: const [
-          MessageBox(
-            amIOwner: false,
-            text: "Merhaba doktor bey",
-          ),
-          MessageBox(
-            amIOwner: true,
-            text: "Merhaba",
-          ),
-          MessageBox(
-            amIOwner: true,
-            text: "Şikayetiniz nedir?",
-          ),
-          MessageBox(
-            amIOwner: false,
-            text: "Belim çok ağrıyor ne yapabilirim?",
-          ),
-          MessageBox(
-            amIOwner: true,
-            text: "🤷‍♂️",
-          ),
-        ],
-      ),
-    );
+    Widget messagesList(List<Mesaj> mesajlar) {
+      return ListView.builder(
+        itemCount: mesajlar.length,
+        itemBuilder: ((context, index) {
+          return MessageBox(
+            isSenderDoctor: mesajlar[index].gonderen == "D",
+            text: mesajlar[index].icerik,
+            time: parseDateTimeToTime(datetime: mesajlar[index].tarih),
+          );
+        }),
+      );
+    }
 
     var controller = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(Icons.arrow_back),
-        title: appBarItem,
-      ),
+      appBar: AppBar(title: appBarItem),
       backgroundColor: colors["meBg"],
       body: Column(
         children: [
-          Expanded(child: messagesList),
+          Expanded(child: futureBridge(child: messagesList, future: mesajlar)),
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -78,16 +80,6 @@ class _ChatScreen extends State<ChatScreen> {
                     vertical: 20,
                     horizontal: 16,
                   ),
-                  trailings: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.attach_file),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.camera_alt),
-                    ),
-                  ],
                 ),
               ),
               const SizedBox(width: 4),

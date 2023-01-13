@@ -6,6 +6,7 @@ class Mesaj {
   final dynamic resim;
   final dynamic dosya;
   final String tarih;
+  final String gonderen;
   final dynamic doktor;
   final dynamic hasta;
 
@@ -15,6 +16,7 @@ class Mesaj {
     required this.resim,
     required this.dosya,
     required this.tarih,
+    required this.gonderen,
     required this.doktor,
     required this.hasta,
   });
@@ -26,15 +28,16 @@ class Mesaj {
       resim: json["mResim"],
       dosya: json["mDosya"],
       tarih: json["mTarih"],
+      gonderen: json["mGonderen"],
       doktor: {
-        "no": json["doktor"]["dNo"],
+        "no": json["doktor"]["no"],
         "avatar": json["doktor"]["avatar"],
         "isimSoyisim": json["doktor"]["isimSoyisim"],
         "ilgiliUzmanlik": json["doktor"]["ilgiliUzmanlik"],
         "online": json["doktor"]["online"],
       },
       hasta: {
-        "no": json["hasta"]["hNo"],
+        "no": json["hasta"]["no"],
         "avatar": json["hasta"]["avatar"],
         "isimSoyisim": json["hasta"]["isimSoyisim"],
         "online": json["doktor"]["online"],

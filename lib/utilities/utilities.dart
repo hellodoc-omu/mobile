@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
 Widget bindTapEventToWidget(Widget w, Function() f) {
@@ -38,4 +36,10 @@ Widget futureBridge({required Function child, required Future future}) {
       return const CircularProgressIndicator();
     },
   );
+}
+
+String parseDateTimeToTime({required String datetime}) {
+  final dateTime = DateTime.parse(datetime);
+
+  return "${dateTime.hour}.${dateTime.minute}";
 }

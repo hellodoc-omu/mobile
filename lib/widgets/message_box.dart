@@ -4,8 +4,9 @@ import 'package:hellodoc/utilities/utilities.dart';
 class MessageBox extends StatelessWidget {
   const MessageBox({
     super.key,
-    required this.amIOwner,
+    required this.isSenderDoctor,
     required this.text,
+    required this.time,
     this.softWrap = true,
     this.textPaddingH = 10,
     this.textPaddingV = 10,
@@ -14,13 +15,15 @@ class MessageBox extends StatelessWidget {
     this.messagesBetweenMarginV = 4,
   });
 
-  final bool amIOwner;
+  final bool isSenderDoctor;
   final bool softWrap;
 
   final String text;
   final double textPaddingH;
   final double textPaddingV;
   final double borderRadius;
+
+  final String time;
 
   final double messagesBetweenMarginH;
   final double messagesBetweenMarginV;
@@ -30,27 +33,41 @@ class MessageBox extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     Color primary = Theme.of(context).primaryColor;
 
-    Color mBg = amIOwner ? primary : Colors.white;
-    Color mtBg = amIOwner ? Colors.white : Colors.black;
+    Color mBg = isSenderDoctor ? primary : Colors.white;
+    Color mtColor = isSenderDoctor ? Colors.white : Colors.black;
 
     Alignment alignment =
-        amIOwner ? Alignment.centerRight : Alignment.centerLeft;
+        isSenderDoctor ? Alignment.centerRight : Alignment.centerLeft;
 
-    var messageBox = ConstrainedBox(
+    var messageBox = Container(
       constraints: BoxConstraints(maxWidth: size.width),
-      child: Container(
-        decoration: BoxDecoration(
-          color: mBg,
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
-        padding: EdgeInsets.symmetric(
-          horizontal: textPaddingH,
-          vertical: textPaddingV,
-        ),
-        child: Text(
-          text,
-          style: TextStyle(color: mtBg),
-          softWrap: softWrap,
+      decoration: BoxDecoration(
+        color: mBg,
+        borderRadius: BorderRadius.circular(borderRadius),
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: textPaddingH,
+        vertical: textPaddingV,
+      ),
+      child: IntrinsicWidth(
+        child: Column(
+          children: [
+            Text(
+              text,
+              style: TextStyle(color: mtColor),
+              softWrap: softWrap,
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Text(
+                time,
+                style: TextStyle(
+                  fontSize: Theme.of(context).textTheme.labelSmall!.fontSize,
+                  color: mtColor.withOpacity(0.5),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

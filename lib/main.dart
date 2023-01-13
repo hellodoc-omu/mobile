@@ -18,7 +18,10 @@ class MyApp extends StatelessWidget {
         primaryColor: colors["primary"],
         appBarTheme: AppBarTheme(color: colors["primary"], elevation: 0),
       ),
-      home: const MessagesScreen(),
+      home: const MessagesScreen(
+        amIDoctor: true,
+        kNo: 2,
+      ),
       debugShowCheckedModeBanner: false,
     );
   }

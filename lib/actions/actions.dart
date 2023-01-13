@@ -12,8 +12,13 @@ Future<List<Mesaj>> fetchMessages({dNo, hNo}) async {
 
   String url = "$API_BASE/mesajlar";
   if (isAnyFilter) url += "?";
-  if (isDNOTyped) url += "dNo=$dNo";
-  if (isHNOTyped) url += "hNo=$hNo";
+  if (isDNOTyped && isHNOTyped) {
+    url += "dNo=$dNo&hNo=$hNo";
+  } else if (isDNOTyped) {
+    url += "dNo=$dNo";
+  } else if (isHNOTyped) {
+    url += "hNo=$hNo";
+  }
 
   http.Response response = await http.get(
     Uri.parse(url),

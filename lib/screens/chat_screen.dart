@@ -50,13 +50,26 @@ class _ChatScreen extends State<ChatScreen> {
       defaultAvatarIconSize: 20,
     );
 
+    final ScrollController scrollController = ScrollController();
+
+    void scrollDown() {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(seconds: 2),
+        curve: Curves.fastOutSlowIn,
+      );
+    }
+
     Widget messagesList(List<Mesaj> mesajlar) {
       dUzNo = mesajlar[0].doktor["dUzNo"];
       String charSymbol = widget.amIDoctor ? "D" : "H";
 
       return ListView.builder(
+        controller: scrollController,
         itemCount: mesajlar.length,
         itemBuilder: ((context, index) {
+          WidgetsBinding.instance.addPostFrameCallback((_) => scrollDown());
+
           return MessageBox(
             isSenderMe: mesajlar[index].gonderen == charSymbol,
             text: mesajlar[index].icerik,

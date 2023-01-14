@@ -39,6 +39,8 @@ class _MessagesScreen extends State<MessagesScreen> {
     }
 
     Widget messageList(List<Mesaj> msjList) {
+      List<String> ikililer = [];
+
       return ListView.separated(
         separatorBuilder: (context, index) {
           return Divider(color: Colors.black.withOpacity(0.1), thickness: 1);
@@ -46,8 +48,12 @@ class _MessagesScreen extends State<MessagesScreen> {
         itemCount: msjList.length,
         itemBuilder: ((context, index) {
           Mesaj m = msjList[index];
+          String ikili = "${m.doktor["no"]}-${m.hasta["no"]}";
+
+          if (ikililer.contains(ikili)) return const SizedBox.shrink();
+          ikililer.add(ikili);
+
           dynamic opposite = widget.amIDoctor ? m.hasta : m.doktor;
-          print(opposite);
 
           return MessageListTile(
             avatar: opposite["avatar"],

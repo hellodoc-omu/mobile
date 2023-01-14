@@ -5,12 +5,12 @@ import 'package:hellodoc/widgets/drawer/drawer_header.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<List<Mesaj>> fetchMessages({dNo, hNo}) async {
+Future<List<Mesaj>> fetchMessages({dNo, hNo, gorusme = false}) async {
   bool isDNOTyped = dNo != null;
   bool isHNOTyped = hNo != null;
   bool isAnyFilter = isDNOTyped || isHNOTyped;
 
-  String url = "$API_BASE/mesajlar";
+  String url = "$API_BASE/mesajlar${gorusme ? "/gorusme" : ""}";
   if (isAnyFilter) url += "?";
   if (isDNOTyped && isHNOTyped) {
     url += "dNo=$dNo&hNo=$hNo";

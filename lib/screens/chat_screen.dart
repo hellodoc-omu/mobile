@@ -30,8 +30,11 @@ class _ChatScreen extends State<ChatScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    Future<List<Mesaj>> mesajlar =
-        fetchMessages(hNo: widget.hNo, dNo: widget.dNo);
+    Future<List<Mesaj>> mesajlar = fetchMessages(
+      hNo: widget.hNo,
+      dNo: widget.dNo,
+      gorusme: true,
+    );
 
     var appBarItem = MessageListTile(
       titleText: widget.opposite["isimSoyisim"],

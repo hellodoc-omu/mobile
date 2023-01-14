@@ -33,6 +33,7 @@ class Mesaj {
         "no": json["doktor"]["no"],
         "avatar": json["doktor"]["avatar"],
         "isimSoyisim": json["doktor"]["isimSoyisim"],
+        "dUzNo": json["doktor"]["dUzNo"],
         "ilgiliUzmanlik": json["doktor"]["ilgiliUzmanlik"],
         "online": json["doktor"]["online"],
       },

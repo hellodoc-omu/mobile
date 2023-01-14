@@ -1,7 +1,6 @@
 import 'package:hellodoc/config/api.dart';
 import 'package:hellodoc/helpers/auth_backend.dart';
 import 'package:hellodoc/models/relationals/mesaj.dart';
-import 'package:hellodoc/widgets/drawer/drawer_header.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -37,6 +36,43 @@ Future<List<Mesaj>> fetchMessages({dNo, hNo, gorusme = false}) async {
     });
 
     return mesajlar;
+  } else {
+    throw Exception("Fetching failed!");
+  }
+}
+
+Future sendMessage({
+  required icerik,
+  resim,
+  dosya,
+  required gonderen,
+  required dNo,
+  required dUzNo,
+  required hNo,
+}) async {
+  String url = "$API_BASE/mesajlar/gonder";
+
+  http.Response response = await http.post(
+    Uri.parse(url),
+    headers: {
+      ...authBackend,
+      "Content-Type": "application/json",
+    },
+    body: jsonEncode(<String, dynamic>{
+      "icerik": icerik,
+      "resim": resim,
+      "dosya": dosya,
+      "gonderen": gonderen,
+      "dNo": dNo,
+      "dUzNo": dUzNo,
+      "hNo": hNo,
+    }),
+  );
+
+  if (response.statusCode == 200 || response.statusCode == 304) {
+    var body = jsonDecode(response.body)["data"];
+
+    return body;
   } else {
     throw Exception("Fetching failed!");
   }

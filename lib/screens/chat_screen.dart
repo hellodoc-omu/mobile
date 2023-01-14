@@ -26,6 +26,8 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreen extends State<ChatScreen> {
+  late int dUzNo;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -49,6 +51,8 @@ class _ChatScreen extends State<ChatScreen> {
     );
 
     Widget messagesList(List<Mesaj> mesajlar) {
+      dUzNo = mesajlar[0].doktor["dUzNo"];
+
       return ListView.builder(
         itemCount: mesajlar.length,
         itemBuilder: ((context, index) {
@@ -87,7 +91,27 @@ class _ChatScreen extends State<ChatScreen> {
               ),
               const SizedBox(width: 4),
               FloatingActionButton(
-                onPressed: () {},
+                onPressed: () async {
+                  var res = await sendMessage(
+                    icerik: controller.text,
+                    gonderen: widget.amIDoctor ? 'D' : 'H',
+                    dNo: widget.dNo,
+                    dUzNo: dUzNo,
+                    hNo: widget.hNo,
+                  );
+
+                  if (res["status"] != "success") {
+                    setState(() {
+                      mesajlar = fetchMessages(
+                        hNo: widget.hNo,
+                        dNo: widget.dNo,
+                        gorusme: true,
+                      );
+                    });
+                  } else {
+                    throw Exception("Message did not send");
+                  }
+                },
                 backgroundColor: colors["primary"],
                 child: const Icon(Icons.send),
               )

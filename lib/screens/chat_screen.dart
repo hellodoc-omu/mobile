@@ -52,12 +52,13 @@ class _ChatScreen extends State<ChatScreen> {
 
     Widget messagesList(List<Mesaj> mesajlar) {
       dUzNo = mesajlar[0].doktor["dUzNo"];
+      String charSymbol = widget.amIDoctor ? "D" : "H";
 
       return ListView.builder(
         itemCount: mesajlar.length,
         itemBuilder: ((context, index) {
           return MessageBox(
-            isSenderDoctor: mesajlar[index].gonderen == "D",
+            isSenderMe: mesajlar[index].gonderen == charSymbol,
             text: mesajlar[index].icerik,
             time: parseDateTimeToTime(datetime: mesajlar[index].tarih),
           );
@@ -65,7 +66,15 @@ class _ChatScreen extends State<ChatScreen> {
       );
     }
 
+    GlobalKey<FormState>? formKey = GlobalKey<FormState>();
     var controller = TextEditingController();
+    String? validator(String? value) {
+      if (value == null || value.isEmpty) {
+        return "Boş mesaj gönderemezsiniz";
+      }
+
+      return null;
+    }
 
     return Scaffold(
       appBar: AppBar(title: appBarItem),
@@ -77,21 +86,27 @@ class _ChatScreen extends State<ChatScreen> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: Textbox(
-                  controller: controller,
-                  validator: (String? value) => null,
-                  hintText: "Buraya yazınız...",
-                  borderColor: Colors.black.withOpacity(0.25),
-                  borderRadius: 7,
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                    horizontal: 16,
+                child: Form(
+                  key: formKey,
+                  child: Textbox(
+                    controller: controller,
+                    validator: validator,
+                    hintText: "Buraya yazınız...",
+                    borderColor: Colors.black.withOpacity(0.25),
+                    borderRadius: 7,
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal: 16,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(width: 4),
               FloatingActionButton(
                 onPressed: () async {
+                  bool val = formKey.currentState!.validate();
+                  if (!val) return;
+
                   var res = await sendMessage(
                     icerik: controller.text,
                     gonderen: widget.amIDoctor ? 'D' : 'H',

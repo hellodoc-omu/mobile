@@ -4,7 +4,7 @@ import 'package:hellodoc/utilities/utilities.dart';
 class MessageBox extends StatelessWidget {
   const MessageBox({
     super.key,
-    required this.isSenderDoctor,
+    required this.isSenderMe,
     required this.text,
     required this.time,
     this.softWrap = true,
@@ -15,7 +15,7 @@ class MessageBox extends StatelessWidget {
     this.messagesBetweenMarginV = 4,
   });
 
-  final bool isSenderDoctor;
+  final bool isSenderMe;
   final bool softWrap;
 
   final String text;
@@ -33,11 +33,11 @@ class MessageBox extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     Color primary = Theme.of(context).primaryColor;
 
-    Color mBg = isSenderDoctor ? primary : Colors.white;
-    Color mtColor = isSenderDoctor ? Colors.white : Colors.black;
+    Color mBg = isSenderMe ? primary : Colors.white;
+    Color mtColor = isSenderMe ? Colors.white : Colors.black;
 
     Alignment alignment =
-        isSenderDoctor ? Alignment.centerRight : Alignment.centerLeft;
+        isSenderMe ? Alignment.centerRight : Alignment.centerLeft;
 
     var messageBox = Container(
       constraints: BoxConstraints(maxWidth: size.width),

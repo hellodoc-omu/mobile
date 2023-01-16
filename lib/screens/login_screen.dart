@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
+import 'package:hellodoc/screens/register_screen.dart';
+import 'package:hellodoc/screens/reset_screen.dart';
 import 'package:hellodoc/widgets/buttoned_text.dart';
 import 'package:hellodoc/widgets/custom_button.dart';
 import 'package:hellodoc/widgets/logo.dart';
@@ -25,8 +27,16 @@ class _LoginScreen extends State<LoginScreen> {
     var bottomTexts = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ButtonedText(onTap: () {}, innerText: "Şifremi unuttum"),
-        ButtonedText(onTap: () {}, innerText: "Hesabınız yok mu?"),
+        ButtonedText(onTap: () {
+          Route route = MaterialPageRoute(builder: (context){return
+            const ResetScreen();});
+          Navigator.push(context, route);
+        }, innerText: "Şifremi unuttum"),
+        ButtonedText(onTap: () {
+          Route route = MaterialPageRoute(builder: (context){return
+            const RegisterScreen();});
+          Navigator.push(context, route);
+        }, innerText: "Hesabınız yok mu?"),
       ],
     );
 

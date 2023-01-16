@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
+import 'package:hellodoc/screens/dr_register_screen.dart';
+import 'package:hellodoc/screens/register_screen.dart';
 import 'package:hellodoc/widgets/custom_button.dart';
 import 'package:hellodoc/widgets/textbox.dart';
+import 'package:hellodoc/screens/hasta.dart';
+
 
 
 
 class RegisterScreen2 extends StatefulWidget {
-  const RegisterScreen2({super.key});
+  String p_mail, p_sifre;
+  RegisterScreen2({required this.p_mail, required this.p_sifre});
+
 
   @override
   State<RegisterScreen2> createState() => _RegisterScreen2();
 }
 
 class _RegisterScreen2 extends State<RegisterScreen2> {
-  final nameController = TextEditingController();
+  TextEditingController isimcontroller = TextEditingController();
+  TextEditingController soyadcontroller = TextEditingController();
+  TextEditingController resimcontroller = TextEditingController();
+
+  var hasta = User(-1, "", "", "", "", true, true, "");
+
 
   int deger = 0;
 
@@ -35,14 +46,40 @@ class _RegisterScreen2 extends State<RegisterScreen2> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CustomButton(
-            onTap: () {},
-            innerText: "Kayıt Ol",
+            onTap: () {
+              if (formKey2!.currentState!.validate()) {
+                formKey2!.currentState!.save();
+                print(hasta.toJson());
+               /* Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RegisterScreen2(
+                          p_mail: mailcontroller.text,
+                          p_sifre: sifrecontroller2.text,
+                        )
+                    ));*/
+              };
+            },
+            innerText: "Hasta Olarak İlerle",
             fitWidth: true,
           ),
           const SizedBox(height: 16),
           CustomButton(
-            onTap: () {},
-            innerText: "İlerle",
+            onTap: () {
+              if (formKey!.currentState!.validate()) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DrRegisterScreen(
+                          p_isim: isimcontroller.text,
+                          p_soyad: soyadcontroller.text,
+                          pp_mail: widget.p_mail,
+                          pp_sifre: widget.p_sifre,
+                        )
+                    ));
+              };
+            },
+            innerText: "Doktor Olarak İlerle",
             fitWidth: true,
           ),
         ],
@@ -73,46 +110,45 @@ class _RegisterScreen2 extends State<RegisterScreen2> {
                 ),
               ],
             ),
-            const SizedBox(height: 50),
-            Textbox(
-              hintText: "Boş",
-              controller: nameController,
-              validator: (v) => null,
+            SizedBox(height: 50),
+            TextFormField(
+              controller: isimcontroller,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'İsim alanı boş bırakılamaz!';
+                }
+                return null;
+              },
+              onSaved: (value) {
+                hasta.ad = value.toString();
+                hasta.email = widget.p_mail ;
+                hasta.sifre = widget.p_sifre;
+              },
+              decoration:InputDecoration(
+                hintText: "İsminizi giriniz",
+
+              ),
             ),
             const SizedBox(height: 16),
-            Textbox(
-              hintText: "Boş",
-              obscureText: true,
-              controller: nameController,
-              validator: (v) => null,
+            TextFormField(
+              controller: soyadcontroller,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Soyad alanı boş bırakılamaz!';
+                }
+                return null;
+              },
+              onSaved: (value) {
+                hasta.soyad = value.toString();
+              },
+              decoration:InputDecoration(
+                hintText: "Soyadınızı giriniz",
+
+              ),
             ),
           ],
 
           ),
-          Column(
-            children: [
-              SizedBox(height: 20,),
-              RadioListTile(
-                  title: Text("Hasta"),
-                  value: 1,
-                  groupValue: deger,
-                  onChanged: (int? gelen){setState(() {
-                    deger = gelen!;
-                  });
-
-                    }),
-              RadioListTile(
-                  title: Text("Doktor"),
-                  value: 2,
-                  groupValue: deger,
-                  onChanged: (int? gelen){setState(() {
-                    deger = gelen!;
-                  });
-
-                  }),
-            ],
-
-          )
         ],
       ),
     );
@@ -128,11 +164,17 @@ class _RegisterScreen2 extends State<RegisterScreen2> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                      size: 30.0,
-                    ),
+                    ElevatedButton(
+                        onPressed: (){
+                          Route route = MaterialPageRoute(builder: (context){return
+                            RegisterScreen();});
+                          Navigator.push(context, route);
+                        },
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 30.0,
+                        ),)
                   ],
                 ),
                 SizedBox(height: size.height/20),

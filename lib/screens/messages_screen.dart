@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hellodoc/actions/actions.dart';
 import 'package:hellodoc/models/relationals/mesaj.dart';
 import 'package:hellodoc/screens/chat_screen.dart';
+import 'package:hellodoc/socket/connection.dart';
 import 'package:hellodoc/utilities/utilities.dart';
 import 'package:hellodoc/widgets/mListTile.dart';
 
@@ -19,6 +20,7 @@ class MessagesScreen extends StatefulWidget {
 
 class _MessagesScreen extends State<MessagesScreen> {
   late Future<List<Mesaj>> mesajlar;
+  SocketConn socketConn = SocketConn();
 
   @override
   void initState() {
@@ -26,17 +28,30 @@ class _MessagesScreen extends State<MessagesScreen> {
       dNo: widget.amIDoctor ? widget.kNo : null,
       hNo: widget.amIDoctor ? null : widget.kNo,
     );
+    socketConn.connectSocket();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    socketConn.disconnectSocket();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     void fetchMsg() {
-      mesajlar = fetchMessages(
-        dNo: widget.amIDoctor ? widget.kNo : null,
-        hNo: widget.amIDoctor ? null : widget.kNo,
-      );
+      setState(() {
+        mesajlar = fetchMessages(
+          dNo: widget.amIDoctor ? widget.kNo : null,
+          hNo: widget.amIDoctor ? null : widget.kNo,
+        );
+      });
     }
+
+    socketConn.getEventFromServer("receiveMessages", (_) {
+      fetchMsg();
+    });
 
     Widget messageList(List<Mesaj> msjList) {
       List<String> ikililer = [];

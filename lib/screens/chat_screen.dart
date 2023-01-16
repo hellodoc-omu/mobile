@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hellodoc/actions/actions.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
 import 'package:hellodoc/models/relationals/mesaj.dart';
+import 'package:hellodoc/socket/connection.dart';
 import 'package:hellodoc/utilities/utilities.dart';
 import 'package:hellodoc/widgets/mListTile.dart';
 import 'package:hellodoc/widgets/message_box.dart';
@@ -27,16 +28,44 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreen extends State<ChatScreen> {
   late int dUzNo;
+  late Future<List<Mesaj>> mesajlar;
+  SocketConn socketConn = SocketConn();
+
+  @override
+  void initState() {
+    mesajlar = fetchMessages(
+      hNo: widget.hNo,
+      dNo: widget.dNo,
+      gorusme: true,
+    );
+    socketConn.connectSocket();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    socketConn.disconnectSocket();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    Future<List<Mesaj>> mesajlar = fetchMessages(
-      hNo: widget.hNo,
-      dNo: widget.dNo,
-      gorusme: true,
-    );
+    void fetchMsg() {
+      mesajlar = fetchMessages(
+        hNo: widget.hNo,
+        dNo: widget.dNo,
+        gorusme: true,
+      );
+    }
+
+    socketConn.getEventFromServer("receiveMessages", (data) {
+      setState(() {
+        fetchMsg();
+      });
+    });
 
     var appBarItem = MessageListTile(
       titleText: widget.opposite["isimSoyisim"],
@@ -128,14 +157,8 @@ class _ChatScreen extends State<ChatScreen> {
                     hNo: widget.hNo,
                   );
 
-                  if (res["status"] != "success") {
-                    setState(() {
-                      mesajlar = fetchMessages(
-                        hNo: widget.hNo,
-                        dNo: widget.dNo,
-                        gorusme: true,
-                      );
-                    });
+                  if (res["status"] == "success") {
+                    socketConn.sendEventToServer("sendMessage", []);
                   } else {
                     throw Exception("Message did not send");
                   }

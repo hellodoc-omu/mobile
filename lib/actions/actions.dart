@@ -1,6 +1,7 @@
 import 'package:hellodoc/config/api.dart';
 import 'package:hellodoc/helpers/auth_backend.dart';
 import 'package:hellodoc/models/relationals/mesaj.dart';
+import 'package:hellodoc/socket/connection.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -70,7 +71,7 @@ Future sendMessage({
   );
 
   if (response.statusCode == 200 || response.statusCode == 304) {
-    var body = jsonDecode(response.body)["data"];
+    var body = jsonDecode(response.body);
 
     return body;
   } else {

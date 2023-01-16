@@ -10,9 +10,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+  http:
+
   cupertino_icons: ^1.0.2
   flutter_rating_stars: ^1.0.3+4
   flutter_rating_bar: ^4.0.1
+  socket_io_client: ^2.0.1
 
 dev_dependencies:
   flutter_test:

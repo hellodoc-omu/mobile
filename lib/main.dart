@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
-import 'package:hellodoc/screens/doctor_mscreen.dart';
-
-import 'package:hellodoc/screens/make_assessment_screen.dart';
 import 'package:hellodoc/screens/messages_screen.dart';
 
 void main() {
@@ -21,8 +18,10 @@ class MyApp extends StatelessWidget {
         primaryColor: colors["primary"],
         appBarTheme: AppBarTheme(color: colors["primary"], elevation: 0),
       ),
-
-      home: const MakeAssessmentScreen(),
+      home: const MessagesScreen(
+        amIDoctor: true,
+        kNo: 2,
+      ),
       debugShowCheckedModeBanner: false,
     );
   }

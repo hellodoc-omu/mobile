@@ -11,6 +11,7 @@ class MessageListTile extends StatefulWidget {
     this.titleColor = Colors.black,
     this.subTitleSize = 14,
     this.subTitleColor = const Color.fromRGBO(0, 0, 0, 0.7),
+    this.avatar,
     this.defaultAvatarIconSize = 32,
     this.defaultAvatarRadius = 43,
     this.contentPadding = EdgeInsets.zero,
@@ -27,6 +28,7 @@ class MessageListTile extends StatefulWidget {
   final double subTitleSize;
   final Color subTitleColor;
 
+  final String? avatar;
   final double defaultAvatarIconSize;
   final double defaultAvatarRadius;
 
@@ -55,6 +57,7 @@ class _MessageListTile extends State<MessageListTile> {
       leading: UserAvatar(
         iconSize: widget.defaultAvatarIconSize,
         radius: widget.defaultAvatarRadius,
+        backgroundImage: widget.avatar,
         isOnline: widget.isOnline,
       ),
       title: Text(widget.titleText, style: titleStyle),

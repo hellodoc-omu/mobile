@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hellodoc/models/entities/doktor.dart';
 import 'package:hellodoc/utilities/utilities.dart';
 import 'package:hellodoc/widgets/doctor_knowledge.dart';
 import 'package:hellodoc/widgets/previous_meetings.dart';
@@ -8,7 +9,9 @@ import '../widgets/custom_button.dart';
 import '../widgets/profile.dart';
 
 class DoctorProfileSeenByPatient extends StatefulWidget {
-  const DoctorProfileSeenByPatient({super.key});
+  const DoctorProfileSeenByPatient({super.key, required this.doktor});
+
+  final Doktor doktor;
 
   @override
   State<DoctorProfileSeenByPatient> createState() =>
@@ -38,7 +41,7 @@ class _DoctorProfileSeenByPatient extends State<DoctorProfileSeenByPatient> {
             ),
             const Expanded(
               child: Text(
-                'Profilim',
+                'Doktor Profili',
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
             ),
@@ -58,12 +61,16 @@ class _DoctorProfileSeenByPatient extends State<DoctorProfileSeenByPatient> {
     );
 
     var shadowedDoctorCard = applyShadowToWidget(
-        w: doctorCard(
-            'Ondokuz Mayıs Üniversitesi Hastanesi',
-            'Cerrahpaşa Tıp Fakültesi',
-            'Dermotoloji',
-            'Cilt Hastalıkları,Göz Hastalıkları'));
+      w: doctorCard(
+        widget.doktor.kuIsim,
+        widget.doktor.fIsim,
+        widget.doktor.abdIsim,
+        widget.doktor.uzmanliklar.join(', '),
+      ),
+    );
     var shadowedMeetsCard = applyShadowToWidget(w: meetingCard());
+
+    String isimSoyisim = "${widget.doktor.kIsim} ${widget.doktor.kSoyIsim}";
 
     return Scaffold(
       backgroundColor: colors["primary"],
@@ -71,7 +78,7 @@ class _DoctorProfileSeenByPatient extends State<DoctorProfileSeenByPatient> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           topBar,
-          profil('Berkay Gebeş', 'berkay.gebes@bil.omu.edu.tr'),
+          profil(isimSoyisim, widget.doktor.kMail),
           stars(30, true),
           const Center(
             child: Padding(

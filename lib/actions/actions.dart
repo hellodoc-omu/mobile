@@ -1,5 +1,8 @@
 import 'package:hellodoc/config/api.dart';
 import 'package:hellodoc/helpers/auth_backend.dart';
+import 'package:hellodoc/models/entities/anabilimdali.dart';
+import 'package:hellodoc/models/entities/doktor.dart';
+import 'package:hellodoc/models/entities/uzmanlik.dart';
 import 'package:hellodoc/models/relationals/mesaj.dart';
 import 'package:hellodoc/socket/connection.dart';
 import 'package:http/http.dart' as http;
@@ -74,6 +77,110 @@ Future sendMessage({
     var body = jsonDecode(response.body);
 
     return body;
+  } else {
+    throw Exception("Fetching failed!");
+  }
+}
+
+Future<List<AnaBilimDali>> fetchAnaBilimDallari() async {
+  String url = "$API_BASE/anabilimdallari";
+
+  http.Response response = await http.get(
+    Uri.parse(url),
+    headers: {
+      ...authBackend,
+    },
+  );
+
+  if (response.statusCode == 200 || response.statusCode == 304) {
+    var body = jsonDecode(response.body)["data"];
+
+    List<AnaBilimDali> anabilimdallari = [];
+
+    body.forEach((data) {
+      anabilimdallari.add(AnaBilimDali.fromJson(data));
+    });
+
+    return anabilimdallari;
+  } else {
+    throw Exception("Fetching failed!");
+  }
+}
+
+Future<List<Uzmanlik>> fetchUzmanliklar() async {
+  String url = "$API_BASE/uzmanliklar";
+
+  http.Response response = await http.get(
+    Uri.parse(url),
+    headers: {
+      ...authBackend,
+    },
+  );
+
+  if (response.statusCode == 200 || response.statusCode == 304) {
+    var body = jsonDecode(response.body)["data"];
+
+    List<Uzmanlik> uzmanliklar = [];
+
+    body.forEach((data) {
+      uzmanliklar.add(Uzmanlik.fromJson(data));
+    });
+
+    return uzmanliklar;
+  } else {
+    throw Exception("Fetching failed!");
+  }
+}
+
+Future<List<Doktor>> fetchDoktorlar({abdNo, uzNo}) async {
+  Map typedChecks = {
+    "abdNo": {
+      "kosul": abdNo != null,
+      "veri": abdNo,
+    },
+    "uzNo": {
+      "kosul": uzNo != null,
+      "veri": uzNo,
+    },
+  };
+
+  int filteredCount = typedChecks.values.where((v) => v["kosul"] == true).length;
+  print("filteredCount: $filteredCount");
+
+  String url = "$API_BASE/doktorlar";
+  if (filteredCount > 0) url += "?";
+
+  List query = [];
+
+  typedChecks.forEach((key, value) {
+    if (value["kosul"]) {
+      String degisken = key;
+      String veri = value["veri"].toString();
+      query.add("$degisken=$veri");
+    }
+  });
+
+  url += query.join('&');
+
+  print(url);
+
+  http.Response response = await http.get(
+    Uri.parse(url),
+    headers: {
+      ...authBackend,
+    },
+  );
+
+  if (response.statusCode == 200 || response.statusCode == 304) {
+    var body = jsonDecode(response.body)["data"];
+
+    List<Doktor> doktorlar = [];
+
+    body.forEach((data) {
+      doktorlar.add(Doktor.fromJson(data));
+    });
+
+    return doktorlar;
   } else {
     throw Exception("Fetching failed!");
   }

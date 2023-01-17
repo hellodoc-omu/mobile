@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hellodoc/models/entities/anabilimdali.dart';
+import 'package:hellodoc/models/entities/doktor.dart';
+import 'package:hellodoc/models/entities/uzmanlik.dart';
 
 Widget bindTapEventToWidget(Widget w, Function() f) {
   return GestureDetector(
@@ -42,4 +45,25 @@ String parseDateTimeToTime({required String datetime}) {
   final dateTime = DateTime.parse(datetime);
 
   return "${dateTime.hour}.${dateTime.minute}";
+}
+
+dynamic getObjectFromKeyValue({
+  required List<dynamic> list,
+  required String key,
+  required String value,
+  String? secondKey,
+  String? secondValue,
+}) {
+  return list.singleWhere((element) {
+    bool check;
+
+    if (secondKey != null && secondValue != null) {
+      check = element.getValue(key) == value &&
+          element.getValue(secondKey) == secondValue;
+    } else {
+      check = element.getValue(key) == value;
+    }
+
+    return check;
+  });
 }

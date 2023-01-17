@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 Widget bindTapEventToWidget(Widget w, Function() f) {
@@ -42,4 +44,14 @@ String parseDateTimeToTime({required String datetime}) {
   final dateTime = DateTime.parse(datetime);
 
   return "${dateTime.hour}.${dateTime.minute}";
+}
+
+void navigateAfterDelay({
+  required BuildContext context,
+  required Widget nextPage,
+  int delay = 5,
+}) {
+  Timer(Duration(seconds: delay), () {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => nextPage));
+  });
 }

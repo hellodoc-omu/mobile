@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
+import 'package:hellodoc/screens/register_screen.dart';
+import 'package:hellodoc/screens/reset_screen.dart';
+import 'package:hellodoc/screens/search_doctor_screen.dart';
 import 'package:hellodoc/widgets/buttoned_text.dart';
 import 'package:hellodoc/widgets/custom_button.dart';
 import 'package:hellodoc/widgets/logo.dart';
@@ -25,8 +28,22 @@ class _LoginScreen extends State<LoginScreen> {
     var bottomTexts = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        ButtonedText(onTap: () {}, innerText: "Şifremi unuttum"),
-        ButtonedText(onTap: () {}, innerText: "Hesabınız yok mu?"),
+        ButtonedText(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ResetScreen()),
+              );
+            },
+            innerText: "Şifremi unuttum"),
+        ButtonedText(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const RegisterScreen()),
+              );
+            },
+            innerText: "Hesabınız yok mu?"),
       ],
     );
 
@@ -50,7 +67,13 @@ class _LoginScreen extends State<LoginScreen> {
           ),
           const SizedBox(height: 16),
           CustomButton(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const SearchDoctorScreen()),
+              );
+            },
             innerText: "Giriş Yap",
             fitWidth: true,
           ),

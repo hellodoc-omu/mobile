@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hellodoc/helpers/variable_breakpoints.dart';
+import 'package:hellodoc/screens/login_screen.dart';
 import 'package:hellodoc/widgets/buttoned_text.dart';
 import 'package:hellodoc/widgets/custom_button.dart';
 import 'package:hellodoc/widgets/logo.dart';
@@ -33,7 +34,12 @@ class _RegisterScreen extends State<RegisterScreen> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         ButtonedText(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+            );
+          },
           innerText: "Zaten bir hesabınız var mı?",
         ),
       ],
